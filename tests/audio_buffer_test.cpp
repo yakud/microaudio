@@ -1,8 +1,8 @@
-#include "catch.hpp"
 #include "../include/audio_buffer.h"
 
-TEST_CASE("AudioBuffer", "[audio]") {
+#include "catch.hpp"
 
+TEST_CASE("AudioBuffer", "[audio]") {
     SECTION("buffer index check") {
         AudioBuffer<int, 4, 128> buffer;
         int *bufferRaw = buffer.getWritePointer(buffer.getNumChannels() - 1);

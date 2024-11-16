@@ -2,8 +2,8 @@
 #ifndef STM32_MONOSYNTH_AUDIO_MODULE_H
 #define STM32_MONOSYNTH_AUDIO_MODULE_H
 
-#include "audio_driver.h"
 #include "audio_buffer.h"
+#include "audio_driver.h"
 #include "audio_processor.h"
 
 /**
@@ -13,10 +13,9 @@
  *
  * @tparam CHANNEL_NUM specifies if the AudioModule is mono, stereo or multichannel
  */
-template<size_t CHANNEL_NUM>
+template <size_t CHANNEL_NUM>
 class AudioModule {
-public:
-
+   public:
     /**
      * Constructor.
      */
@@ -45,8 +44,8 @@ public:
     inline float getSampleRate() { return audioProcessor.getSampleRate(); };
 
     /**
-    * Disabling copy constructor.
-    */
+     * Disabling copy constructor.
+     */
     AudioModule<CHANNEL_NUM>(const AudioModule<CHANNEL_NUM> &) = delete;
 
     /**
@@ -54,12 +53,11 @@ public:
      */
     AudioModule<CHANNEL_NUM> &operator=(AudioModule<CHANNEL_NUM> &) = delete;
 
-private:
+   private:
     /**
      * Reference to the AudioProcessor using this AudioModule.
      */
     AudioProcessor &audioProcessor;
-
 };
 
-#endif //STM32_MONOSYNTH_AUDIO_MODULE_H
+#endif  // STM32_MONOSYNTH_AUDIO_MODULE_H

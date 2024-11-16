@@ -2,17 +2,15 @@
 #ifndef MIOSIX_KERNEL_AUDIO_PROCESSOR_H
 #define MIOSIX_KERNEL_AUDIO_PROCESSOR_H
 
-#include "audio_processable.h"
 #include "audio_buffer.h"
-
+#include "audio_processable.h"
 
 /**
  * Base abstract class that can be extended to implement a
  * processor for audio.
  */
 class AudioProcessor : public AudioProcessable {
-public:
-
+   public:
     /**
      * Constructor.
      *
@@ -52,13 +50,11 @@ public:
      */
     AudioProcessor() = delete;
 
-private:
+   private:
     /**
      * Reference to the AudioDriver.
      */
     AudioDriver &audioDriver;
 };
 
-
-
-#endif //MIOSIX_KERNEL_AUDIO_PROCESSOR_H
+#endif  // MIOSIX_KERNEL_AUDIO_PROCESSOR_H

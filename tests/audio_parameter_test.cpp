@@ -1,5 +1,6 @@
-#include "catch.hpp"
 #include "../include/audio_parameter.h"
+
+#include "catch.hpp"
 
 TEST_CASE("AudioParameter", "[audio]") {
     AudioParameter<float> parameter(30.0);

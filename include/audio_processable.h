@@ -8,7 +8,7 @@
  * to write in the audio buffer.
  */
 class AudioProcessable {
-public:
+   public:
     /**
      * This method is called by the AudioDriver during
      * a DMA complete transfer IRQ.
@@ -21,8 +21,8 @@ public:
  * audio driver with an empty callback.
  */
 class AudioProcessableDummy : public AudioProcessable {
-public:
+   public:
     inline void process() override {};
 };
 
-#endif //MIOSIX_KERNEL_AUDIO_PROCESSABLE_H
+#endif  // MIOSIX_KERNEL_AUDIO_PROCESSABLE_H

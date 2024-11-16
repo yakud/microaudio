@@ -3,9 +3,8 @@
 #define MIOSIX_AUDIO_AUDIO_BUFFER_H
 // TODO: change all the guards names
 
-#include <array>
 #include <algorithm>
-
+#include <array>
 
 /**
  * This template class define a multi channel buffer that can be used to
@@ -15,9 +14,9 @@
  * @tparam CHANNEL_NUM number of channels of the buffer
  * @tparam BUFFER_LEN length of each channel of the buffer
  */
-template<typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
+template <typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
 class AudioBuffer {
-public:
+   public:
     /**
      * Constructor, statically asserts that the length of the
      * AudioBuffer is even.
@@ -66,7 +65,7 @@ public:
      *
      * @return array containing arrays of data
      */
-    inline std::array <std::array<T, BUFFER_LEN>, CHANNEL_NUM> &getBufferContainer() { return bufferContainer; };
+    inline std::array<std::array<T, BUFFER_LEN>, CHANNEL_NUM> &getBufferContainer() { return bufferContainer; };
 
     /**
      * Applies a constant gain to the AudioBuffer.
@@ -109,25 +108,24 @@ public:
      */
     void clear();
 
-private:
+   private:
     /**
      * Data structure containing the buffer data.
      */
-    std::array <std::array<T, BUFFER_LEN>, CHANNEL_NUM> bufferContainer;
+    std::array<std::array<T, BUFFER_LEN>, CHANNEL_NUM> bufferContainer;
 
     /**
      * Disabling copy constructor.
      */
-    AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN>(const AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN> &);
+    AudioBuffer(const AudioBuffer &) = delete;
 
     /**
      * Disabling move operator.
      */
-    AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN> &operator=(const AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN> &);
+    AudioBuffer &operator=(const AudioBuffer &) = delete;
 };
 
-
-template<typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
+template <typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
 void AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN>::applyGain(float gain) {
     for (uint32_t channelNumber = 0; channelNumber < CHANNEL_NUM; channelNumber++) {
         // iterating for each channel
@@ -139,7 +137,7 @@ void AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN>::applyGain(float gain) {
     }
 }
 
-template<typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
+template <typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
 void AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN>::add(const AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN> &buffer) {
     for (uint32_t channelNumber = 0; channelNumber < CHANNEL_NUM; channelNumber++) {
         // iterating for each channelBuffer1
@@ -152,7 +150,7 @@ void AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN>::add(const AudioBuffer<T, CHANNEL_N
     }
 }
 
-template<typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
+template <typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
 void AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN>::multiply(const AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN> &buffer) {
     for (uint32_t channelNumber = 0; channelNumber < CHANNEL_NUM; channelNumber++) {
         // iterating for each channelBuffer1
@@ -165,16 +163,15 @@ void AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN>::multiply(const AudioBuffer<T, CHAN
     }
 }
 
-template<typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
+template <typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
 void AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN>::copyOnChannel(const AudioBuffer<T, 1, BUFFER_LEN> &audioBuffer,
                                                             size_t channelNumber) {
-
     T *buffer1 = getWritePointer(channelNumber);
     const T *buffer2 = audioBuffer.getReadPointer(0);
     std::copy(buffer2, buffer2 + BUFFER_LEN, buffer1);
 }
 
-template<typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
+template <typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
 void AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN>::copyFrom(const AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN> &audioBuffer) {
     T *buffer1;
     const T *buffer2;
@@ -185,11 +182,11 @@ void AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN>::copyFrom(const AudioBuffer<T, CHAN
     }
 }
 
-template<typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
+template <typename T, size_t CHANNEL_NUM, size_t BUFFER_LEN>
 void AudioBuffer<T, CHANNEL_NUM, BUFFER_LEN>::clear() {
     for (uint32_t channelNumber = 0; channelNumber < CHANNEL_NUM; channelNumber++) {
-        bufferContainer[channelNumber].fill(0); // TODO: manage templating generalization
+        bufferContainer[channelNumber].fill(0);  // TODO: manage templating generalization
     }
 }
 
-#endif //MIOSIX_AUDIO_AUDIO_BUFFER_H
+#endif  // MIOSIX_AUDIO_AUDIO_BUFFER_H

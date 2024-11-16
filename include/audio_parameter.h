@@ -19,10 +19,9 @@
  *
  * @tparam T type
  */
-template<typename T>
+template <typename T>
 class AudioParameter {
-public:
-
+   public:
     /**
      * Constructor with an initializer for the parameter value.
      *
@@ -53,7 +52,7 @@ public:
      *
      * @return interpolated value
      */
-     // TODO: interpolation works just for float values
+    // TODO: interpolation works just for float values
     inline T getInterpolatedValue() const {
         return AudioMath::linearInterpolation(lastValue, currentValue, getTransitionIndex());
     };
@@ -120,7 +119,7 @@ public:
         return passedTransitionSamples >= totalTransitionSamples;
     }
 
-private:
+   private:
     /**
      * This value indicates the total samples needed
      * to pass from lastValue to currentValue.
@@ -145,4 +144,4 @@ private:
     T lastValue;
 };
 
-#endif //STM32_MONOSYNTH_AUDIO_PARAMETER_H
+#endif  // STM32_MONOSYNTH_AUDIO_PARAMETER_H

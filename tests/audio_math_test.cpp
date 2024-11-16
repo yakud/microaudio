@@ -1,6 +1,8 @@
-#include "catch.hpp"
 #include "../include/audio_math.h"
+
 #include <functional>
+
+#include "catch.hpp"
 
 TEST_CASE("linearInterpolation", "[audio]") {
     float a = -10;
@@ -96,7 +98,6 @@ TEST_CASE("LookupTable", "[audio]") {
         AudioMath::LookupTable<5> linearPeriodicLUT(f, 0, 5, AudioMath::LookupTableEdges::PERIODIC);
         AudioMath::LookupTable<5> linearZeroedLUT(f, 0, 5, AudioMath::LookupTableEdges::ZEROED);
 
-
         SECTION("values in between LUT") {
             testValue = GENERATE(0.5, 1.5, 2.5, 3.5);
             REQUIRE(linearPeriodicLUT(testValue) == Approx(testValue));
@@ -109,8 +110,8 @@ TEST_CASE("LookupTable", "[audio]") {
             REQUIRE(linearZeroedLUT(testValue) == Approx(2.0));
 
             testValue = 4.9;
-            REQUIRE(linearPeriodicLUT(testValue) == Approx(0.1*4));
-            REQUIRE(linearZeroedLUT(testValue) == Approx(0.1*4));
+            REQUIRE(linearPeriodicLUT(testValue) == Approx(0.1 * 4));
+            REQUIRE(linearZeroedLUT(testValue) == Approx(0.1 * 4));
 
             testValue = 5.0;
             REQUIRE(linearPeriodicLUT(testValue) == Approx(0.0));

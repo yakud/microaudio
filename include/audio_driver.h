@@ -2,9 +2,9 @@
 #ifndef MIOSIX_AUDIO_DRIVER_AUDIO_H
 #define MIOSIX_AUDIO_DRIVER_AUDIO_H
 
+#include "audio_buffer.h"
 #include "audio_config.h"
 #include "audio_processable.h"
-#include "audio_buffer.h"
 
 // TODO: make the output buffer working with a custom type (int, double, float...)
 
@@ -17,8 +17,7 @@
  * Inherit from this class to implement the actual driver for your system.
  */
 class AudioDriver {
-public:
-
+   public:
     /**
      * Constructor.
      */
@@ -106,8 +105,7 @@ public:
      */
     AudioDriver &operator=(const AudioDriver &) = delete;
 
-private:
-
+   private:
     /**
      * Size of the buffer.
      */
@@ -136,8 +134,7 @@ private:
      */
     float volume;
 
-protected:
-
+   protected:
     /**
      * Setup of the sample rate from SampleRate enum class
      */
@@ -147,8 +144,6 @@ protected:
      * Utility method to copy current float buffers to the DAC integer output buffer
      */
     void writeToOutputBuffer(int16_t *writableRawBuffer) {};
-
 };
 
-
-#endif //MIOSIX_AUDIO_DRIVER_AUDIO_H
+#endif  // MIOSIX_AUDIO_DRIVER_AUDIO_H
